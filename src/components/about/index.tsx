@@ -78,7 +78,7 @@ const About = () => {
   const toast = useToast();
 
   const getData = async () => {
-    const res = await requies.get("/experiences", { page: 1, user: userInfo._id, limit: 5 });
+    const res = await requies.get("/experiences", { data: { page: 1, user: userInfo._id, limit: 5 } });
     setExperience(res.data.data);
   };
 

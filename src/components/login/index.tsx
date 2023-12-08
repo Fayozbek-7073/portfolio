@@ -11,7 +11,6 @@ const Login = () => {
   const [setUserInfo] = useLoginStore((s) => [s.setUserInfo], shallow);
 
   const submit = async () => {
-    // e.preventDefault();
     try {
       const res = await requies.post("auth/login", {
         username: userLogin,
@@ -48,13 +47,8 @@ const Login = () => {
                   <div className="col-lg-6">
                     <div className="card-body p-md-5 mx-md-4">
                       <div className="text-center">
-                        <img
-                          className="imgtbo"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                        />
-                        <h4 className="mt-1 mb-5 pb-1">
-                          We are The Lotus Team
-                        </h4>
+                        <img className="imgtbo" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp" />
+                        <h4 className="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
                       </div>
 
                       <form>
@@ -66,9 +60,7 @@ const Login = () => {
                             id="form2Example11"
                             className="form-control"
                             placeholder="Phone number or email address"
-                            onChange={(e: { target: { value: string } }) =>
-                              setUserLogin(e.target.value)
-                            }
+                            onChange={(e: { target: { value: string } }) => setUserLogin(e.target.value)}
                           />
                           <label className="form-label">Username</label>
                         </div>
@@ -79,19 +71,13 @@ const Login = () => {
                             id="form2Example22"
                             className="form-control"
                             placeholder="Password"
-                            onChange={(e: { target: { value: string } }) =>
-                              setUserLoginPasword(e.target.value)
-                            }
+                            onChange={(e: { target: { value: string } }) => setUserLoginPasword(e.target.value)}
                           />
                           <label className="form-label">Password</label>
                         </div>
 
                         <div className="text-center pt-1 mb-5 pb-1">
-                          <button
-                            className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                            type="button"
-                            onClick={submit}
-                          >
+                          <button className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" onClick={submit}>
                             Log in
                           </button>
                           <a className="text-muted" href="#!">
@@ -101,10 +87,7 @@ const Login = () => {
 
                         <div className="d-flex align-items-center justify-content-center pb-4">
                           <p className="mb-0 me-2">Don't have an account?</p>
-                          <button
-                            type="button"
-                            className="btn btn-outline-danger m-2"
-                          >
+                          <button type="button" className="btn btn-outline-danger m-2">
                             <Link to={"/Register"}> Register</Link>
                           </button>
                         </div>
@@ -115,11 +98,8 @@ const Login = () => {
                     <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                       <h4 className="mb-4">We are more than just a company</h4>
                       <p className="small mb-0">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                       </p>
                     </div>
                   </div>

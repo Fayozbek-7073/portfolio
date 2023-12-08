@@ -72,9 +72,7 @@ const Addport = () => {
 
   const getData = async () => {
     const res = await requies.get("/portfolios", {
-      page: 1,
-      user: userInfo._id,
-      limit: 5,
+      data: { page: 1, user: userInfo._id, limit: 5 },
     });
     setPortfolio(res.data.data);
   };
@@ -149,23 +147,9 @@ const Addport = () => {
             <span className="boxchak" style={{ color: "" }}>
               Name
             </span>
-            <input
-              type="text"
-              name="name"
-              value={dataFoms.name}
-              onChange={handleInputChange}
-              placeholder="Name"
-              style={{ width: "95%" }}
-            />
+            <input type="text" name="name" value={dataFoms.name} onChange={handleInputChange} placeholder="Name" style={{ width: "95%" }} />
 
-            <input
-              type="text"
-              name="url"
-              value={dataFoms.url}
-              onChange={handleInputChange}
-              placeholder="Url"
-              style={{ width: "95%" }}
-            />
+            <input type="text" name="url" value={dataFoms.url} onChange={handleInputChange} placeholder="Url" style={{ width: "95%" }} />
 
             <input
               type="text"
@@ -179,20 +163,9 @@ const Addport = () => {
               Photo
             </span>
             <div className="input-group mb-3">
-              <input
-                type="file"
-                name="photo"
-                className="form-control"
-                id="inputGroupFile01"
-                onChange={handleFileChange}
-              />
+              <input type="file" name="photo" className="form-control" id="inputGroupFile01" onChange={handleFileChange} />
             </div>
-            <Button
-              type="submit"
-              className="boxchak"
-              onClick={addPortfolio}
-              colorScheme="blue"
-            >
+            <Button type="submit" className="boxchak" onClick={addPortfolio} colorScheme="blue">
               Add Experience
             </Button>
           </div>
@@ -207,36 +180,20 @@ const Addport = () => {
         <div className="condainer con-winz">
           {portfolioData.map((item: IPortfolioData) => (
             <div className="box-portfoli" key={item?._id}>
-              <img
-                src={`https://ap-portfolio-backend.up.railway.app/upload/${
-                  item.photo._id
-                }.${item.photo.name.split(".")[1]}`}
-                alt="Foto"
-              />
+              <img src={`https://ap-portfolio-backend.up.railway.app/upload/${item.photo._id}.${item.photo.name.split(".")[1]}`} alt="Foto" />
               <h1>{item?.name}</h1>
               <p>
-                <span className="text-primary"> Portfolio Title:</span>{" "}
-                {item.description}
+                <span className="text-primary"> Portfolio Title:</span> {item.description}
               </p>
               <p>
-                <span className="text-primary"> Portfolio url: </span>{" "}
-                {item.url}
+                <span className="text-primary"> Portfolio url: </span> {item.url}
               </p>
               <a href=""></a>
-              <button
-                type="button"
-                className="btn btn-success"
-                onClick={() => edits(item._id)}
-                style={{ marginRight: "20px" }}
-              >
+              <button type="button" className="btn btn-success" onClick={() => edits(item._id)} style={{ marginRight: "20px" }}>
                 edit{" "}
               </button>
 
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={() => deletes(item._id)}
-              >
+              <button type="button" className="btn btn-danger" onClick={() => deletes(item._id)}>
                 delete{" "}
               </button>
               <hr className="color-white" />

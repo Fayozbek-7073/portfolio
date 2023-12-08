@@ -62,6 +62,7 @@ interface IExperiencesData {
   company: string;
   description: string;
   startDate: string;
+  name: string;
   endDate: string;
   _id: string;
 }
@@ -74,17 +75,16 @@ const Education = () => {
     company: "",
     description: "",
     startDate: "",
+    name: "",
     endDate: "",
     _id: "",
   });
-  const [experiencesData, setExperience] = useState<IExperiences[]>([]);
+  const [experiencesData, setExperience] = useState([]);
   const toast = useToast();
 
   const getData = async () => {
     const res = await requies.get("/education", {
-      page: 1,
-      user: userInfo._id,
-      limit: 5,
+      data: { page: 1, user: userInfo._id, limit: 5 },
     });
     console.log(res);
     setExperience(res.data.data);
@@ -118,6 +118,7 @@ const Education = () => {
         company: "",
         description: "",
         startDate: "",
+        name: "",
         endDate: "",
         _id: "",
       });
@@ -149,6 +150,7 @@ const Education = () => {
           description: "",
           startDate: "",
           endDate: "",
+          name: "",
           _id: "",
         });
       }
@@ -230,41 +232,53 @@ const Education = () => {
           <Spacer />
           <WrapItem>
             <div className="row row-cols-1 row-cols-md-3 g-4">
-              {experiencesData?.map((item: any) => (
-                <div className="col">
-                  <div className="card h-100 card-education">
-                    <img src="/src/img/my/favicon.png" className="card-img-top" alt="F" />
-                    <div className="card-body">
-                      <h5 className="card-title">{item.name}</h5>
-                      <p className="card-text">Start Date: {item.startDate}</p>
-                      <p className="card-text">End Date: {item.endDate}</p>
-                      <p className="card-text">Level: {item.level} </p>
-                      <button
-                        type="button"
-                        className="btn btn-success"
-                        onClick={() => {
-                          setExperiences({
-                            yourPostion: item.workName,
-                            company: item.companyName,
-                            description: item.description,
-                            startDate: item.startDate,
-                            endDate: item.endDate,
-                            _id: item._id,
-                          });
-                          onOpen();
-                        }}
-                        style={{ marginRight: "20px" }}
-                      >
-                        edit{" "}
-                      </button>
+              {experiencesData?.map(
+                (item: {
+                  _id: string;
+                  workName: string;
+                  companyName: string;
+                  name: string;
+                  startDate: string;
+                  endDate: string;
+                  level: string;
+                  description: string;
+                }) => (
+                  <div className="col">
+                    <div className="card h-100 card-education">
+                      <img src="/src/img/my/favicon.png" className="card-img-top" alt="F" />
+                      <div className="card-body">
+                        <h5 className="card-title">{item.name}</h5>
+                        <p className="card-text">Start Date: {item.startDate}</p>
+                        <p className="card-text">End Date: {item.endDate}</p>
+                        <p className="card-text">Level: {item.level} </p>
+                        <button
+                          type="button"
+                          className="btn btn-success"
+                          onClick={() => {
+                            setExperiences({
+                              yourPostion: item.workName,
+                              company: item.companyName,
+                              description: item.description,
+                              startDate: item.startDate,
+                              endDate: item.endDate,
+                              name: item.name,
+                              _id: item._id,
+                            });
+                            onOpen();
+                          }}
+                          style={{ marginRight: "20px" }}
+                        >
+                          edit{" "}
+                        </button>
 
-                      <button type="button" className="btn btn-danger" onClick={() => deletes(item._id)}>
-                        delete{" "}
-                      </button>
+                        <button type="button" className="btn btn-danger" onClick={() => deletes(item._id)}>
+                          delete{" "}
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </WrapItem>
         </Wrap>

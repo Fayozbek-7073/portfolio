@@ -21,7 +21,7 @@ import { useLoginStore } from "../../store/useLogin";
 interface IEdit {
   name: string;
   id: string;
-  precents: string;
+  precent: number;
   delete: boolean;
 }
 const skill = () => {
@@ -32,7 +32,7 @@ const skill = () => {
   const [skillEdit, setSkillEdit] = useState<IEdit>({
     name: "",
     id: "",
-    precents: "",
+    precent: 0,
     delete: false,
   });
 
@@ -40,11 +40,10 @@ const skill = () => {
 
   const getData = async () => {
     const res = await requies.get("/skills", {
-      page: 1,
-      user: userInfo._id,
-      limit: 5,
+      data: { page: 1, user: userInfo._id, limit: 5 },
     });
-    setSkillData(res.data);
+
+    setSkillData(res.data.data);
   };
 
   useEffect(() => {
@@ -54,7 +53,7 @@ const skill = () => {
   const editSkill = async () => {
     const res = await requies.put(`/skills/${skillEdit?.id}`, {
       name: skillEdit.name,
-      percent: skillEdit.precents,
+      percent: skillEdit.precent,
     });
     if (res.status === 200) {
       onClose();
@@ -87,7 +86,7 @@ const skill = () => {
     console.log(skillEdit);
     const res = await requies.post(`/skills`, {
       name: skillEdit.name,
-      percent: skillEdit.precents,
+      percent: skillEdit.precent,
     });
     console.log("object", res);
     if (res.status === 201) {
@@ -103,7 +102,7 @@ const skill = () => {
       setSkillEdit({
         name: "",
         id: "",
-        precents: "",
+        precent: 0,
         delete: false,
       });
     }
@@ -131,7 +130,7 @@ const skill = () => {
               placeholder="Skill Percent"
               size="md"
               width={"95%"}
-              onChange={(e: { target: { value: string } }) => setSkillEdit({ ...skillEdit, precents: e.target.value })}
+              onChange={(e: { target: { value: string } }) => setSkillEdit({ ...skillEdit, precent: +e.target.value })}
             />
 
             <Button className="boxchak" colorScheme="blue" onClick={skillCreate}>
@@ -145,7 +144,7 @@ const skill = () => {
             <Box className="box-list" textAlign={"center"} color={"#ffff"}>
               Skills <span className="boxchakx">List</span>{" "}
             </Box>
-            {skillData?.data?.map((item) => (
+            {skillData?.map((item: { name: string; percent: number; _id: string; delete: boolean; precent: number }) => (
               <Box>
                 <p>
                   <span className="boxchak" color="">
@@ -163,7 +162,7 @@ const skill = () => {
                   onClick={() => {
                     setSkillEdit({
                       name: item.name,
-                      precents: item.percent,
+                      precent: item.percent,
                       id: item._id,
                       delete: false,
                     });
@@ -191,7 +190,7 @@ const skill = () => {
                   onClick={() => {
                     setSkillEdit({
                       name: item.name,
-                      precents: item.percent,
+                      precent: item.percent,
                       id: item._id,
                       delete: true,
                     });
@@ -253,9 +252,9 @@ const skill = () => {
                 <Input
                   placeholder="Skill Percent"
                   size="md"
-                  value={skillEdit.precents}
+                  value={skillEdit.precent}
                   width={"95%"}
-                  onChange={(e: { target: { value: string } }) => setSkillEdit({ ...skillEdit, precents: e.target.value })}
+                  onChange={(e: { target: { value: string } }) => setSkillEdit({ ...skillEdit, precent: +e.target.value })}
                 />
               </>
             )}

@@ -10,6 +10,7 @@ export interface IMenu {
 }
 const Sidebar = () => {
   const [userInfo, setUserInfo] = useLoginStore((s) => [s.userInfo, s.setUserInfo], shallow);
+  console.log(userInfo);
 
   const logout = () => {
     setUserInfo({});
