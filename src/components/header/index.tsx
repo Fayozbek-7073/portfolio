@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <HStack paddingX={"20"} paddingY={"4"} justifyContent={"space-between"}>
       <Box>
-        <img width={"50px"} src="./assets/favicon.png" alt="Favicon Logo" />
+        <img width="50px" src="./src/assets/images/favicon.png" alt="Favicon" />
       </Box>
       <Box>
         <Link to={"/portfolio"}>
