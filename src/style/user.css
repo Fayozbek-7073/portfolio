@@ -1,0 +1,20 @@
+.cardz{
+    max-width: 697px;
+    background-color: rgba(0, 0, 0, 0.901);
+    color: aqua;
+    padding: 25px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 100px;
+}
+
+.col-red{
+    color: rgb(253, 12, 12);
+}
+.xxx-body{
+    display: flex;
+    justify-content: space-around;
+}
+.card-body{
+    /* height: 90vh; */
+}

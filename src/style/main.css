@@ -1,0 +1,134 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.sign_up{
+    height: 100vh;
+    background: url(img/background.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerzx{
+    background: rgb(2,0,36);
+    background: -moz-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.7008053221288515) 7%, rgb(35, 11, 98) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.7008053221288515) 7%, rgb(4 4 4) 100%);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(6 6 8 / 70%) 7%, rgb(0 0 0) 100%);
+    width: 380px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: -100px;
+}
+
+h1{
+    color: black;
+    font-size: 30px;
+}
+
+h1::before{
+    content: "";
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: rgba(0, 0, 0, 0);
+    left: 540px;
+    top: 29%;
+    position: absolute;
+}
+
+h1::after{
+    content: "";
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0);
+    right: 540px;
+    top: 29%;
+    position: absolute;
+}
+
+#create{
+    font-size: 12px;
+}
+
+input{
+    padding: 6px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.details input{
+   width: 335px;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+}
+
+.check{
+    display: inline-block;
+}
+
+#register_btn{
+    text-decoration: none;
+    padding: 10px 120px;
+    border: 1px solid green;
+    background: green;
+    color: white;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+#register_btn:hover{
+    background: transparent;
+    color: black;
+    border: 1px solid black;
+    transition: .5s;
+}
+
+.term a{
+    color: green;
+}
+
+#privacy{
+    color: green;
+}
+
+.signIn{
+    display: block;
+    color: black;
+    position: absolute;
+    top: 78%;
+}
+
+.checkbox{
+    width: 355px;
+    margin-top: 10px;
+}
+
+.signIn p span a{
+    color: black;
+    margin-left: 6px;
+}
+.btv-reg{
+    width: 180px;
+    transform: translateY(13px);
+}
+
+.bg-line{
+    margin-left: 16px;
+}
+.form-control{
+    text-transform:none;
+    
+}
