@@ -80,7 +80,6 @@ const Education = () => {
   const [experiencesData, setExperience] = useState<IExperiences[]>([]);
   const toast = useToast();
 
-
   const getData = async () => {
     const res = await requies.get("/education", {
       page: 1,
@@ -133,10 +132,7 @@ const Education = () => {
       formData.append("description", experiences.description);
       formData.append("startDate", experiences.startDate);
       formData.append("endDate", experiences.endDate);
-      const { status } = await requies.put(
-        `education/${experiences._id}`,
-        formData
-      );
+      const { status } = await requies.put(`education/${experiences._id}`, formData);
 
       if (status === 200) {
         toast({
@@ -171,13 +167,7 @@ const Education = () => {
       <Flex>
         <Wrap>
           <Box p="4" width={"100%"}>
-            <Box
-              backgroundColor={"#a0aec0"}
-              width={"98%"}
-              borderRadius={"10px"}
-              padding={"15px"}
-              height={"673px"}
-            >
+            <Box backgroundColor={"#a0aec0"} width={"98%"} borderRadius={"10px"} padding={"15px"} height={"673px"}>
               <Box className="box-list" textAlign={"center"} color={"#ffff"}>
                 Add Your <span className="boxchakx">Education</span>{" "}
               </Box>
@@ -190,9 +180,7 @@ const Education = () => {
                 placeholder="Education Name"
                 size="md"
                 width={"95%"}
-                onChange={(e: { target: { value: string } }) =>
-                  setExperiences({ ...experiences, name: e.target.value })
-                }
+                onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, name: e.target.value })}
               />
               <span className="boxchak" color="">
                 Start Date
@@ -201,9 +189,7 @@ const Education = () => {
                 placeholder="Select Date and Time"
                 size="md"
                 type="datetime-local"
-                onChange={(e: { target: { value: string } }) =>
-                  setExperiences({ ...experiences, startDate: e.target.value })
-                }
+                onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, startDate: e.target.value })}
               />
               <span className="boxchak" color="">
                 Start Date
@@ -212,9 +198,7 @@ const Education = () => {
                 placeholder="Select Date and Time"
                 size="md"
                 type="datetime-local"
-                onChange={(e: { target: { value: string } }) =>
-                  setExperiences({ ...experiences, endDate: e.target.value })
-                }
+                onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, endDate: e.target.value })}
               />
               <span className="boxchak" color="">
                 Education Level
@@ -224,9 +208,7 @@ const Education = () => {
                 placeholder="Education Level"
                 size="md"
                 width={"95%"}
-                onChange={(e: { target: { value: string } }) =>
-                  setExperiences({ ...experiences, endDate: e.target.value })
-                }
+                onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, endDate: e.target.value })}
               />
               <span className="boxchak" color="">
                 Description
@@ -237,9 +219,7 @@ const Education = () => {
                 placeholder="Text here..."
                 size="md"
                 width={"95%"}
-                onChange={(e: { target: { value: string } }) =>
-                  setExperiences({ ...experiences, endDate: e.target.value })
-                }
+                onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, endDate: e.target.value })}
               />
               <p></p>
               <Button className="boxchak" colorScheme="blue" onClick={addExp}>
@@ -253,11 +233,7 @@ const Education = () => {
               {experiencesData?.map((item: any) => (
                 <div className="col">
                   <div className="card h-100 card-education">
-                    <img
-                      src="/src/img/my/favicon.png"
-                      className="card-img-top"
-                      alt="F"
-                    />
+                    <img src="/src/img/my/favicon.png" className="card-img-top" alt="F" />
                     <div className="card-body">
                       <h5 className="card-title">{item.name}</h5>
                       <p className="card-text">Start Date: {item.startDate}</p>
@@ -282,11 +258,7 @@ const Education = () => {
                         edit{" "}
                       </button>
 
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        onClick={() => deletes(item._id)}
-                      >
+                      <button type="button" className="btn btn-danger" onClick={() => deletes(item._id)}>
                         delete{" "}
                       </button>
                     </div>
@@ -309,18 +281,14 @@ const Education = () => {
               value={experiences.yourPostion}
               size="md"
               width={"95%"}
-              onChange={(e: { target: { value: stirng } }) =>
-                setExperiences({ ...experiences, yourPostion: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, yourPostion: e.target.value })}
             />
             <Input
               placeholder="Company"
               size="md"
               value={experiences.company}
               width={"95%"}
-              onChange={(e: { target: { value: stirng } }) =>
-                setExperiences({ ...experiences, company: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, company: e.target.value })}
             />
 
             <Input
@@ -329,9 +297,7 @@ const Education = () => {
               value={experiences.startDate}
               width={"95%"}
               type="datetime-local"
-              onChange={(e: { target: { value: stirng } }) =>
-                setExperiences({ ...experiences, startDate: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, startDate: e.target.value })}
             />
 
             <Input
@@ -340,9 +306,7 @@ const Education = () => {
               value={experiences.endDate}
               width={"95%"}
               type="datetime-local"
-              onChange={(e: { target: { value: stirng } }) =>
-                setExperiences({ ...experiences, endDate: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, endDate: e.target.value })}
             />
           </ModalBody>
 

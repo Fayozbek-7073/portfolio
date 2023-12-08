@@ -248,14 +248,14 @@ const skill = () => {
                   value={skillEdit.name}
                   size="md"
                   width={"95%"}
-                  onChange={(e: { target: { value: stirng } }) => setSkillEdit({ ...skillEdit, name: e.target.value })}
+                  onChange={(e: { target: { value: string } }) => setSkillEdit({ ...skillEdit, name: e.target.value })}
                 />
                 <Input
                   placeholder="Skill Percent"
                   size="md"
                   value={skillEdit.precents}
                   width={"95%"}
-                  onChange={(e: { target: { value: stirng } }) => setSkillEdit({ ...skillEdit, precents: e.target.value })}
+                  onChange={(e: { target: { value: string } }) => setSkillEdit({ ...skillEdit, precents: e.target.value })}
                 />
               </>
             )}
