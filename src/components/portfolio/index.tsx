@@ -6,7 +6,7 @@ const Portfolio = () => {
       <header id="header" className="fixed-top ">
         <div className="container d-flex align-items-center justify-content-between">
           <a href="index.html" className="logo">
-            <img src="./src/assets/img/logo.png" alt="" className="img-fluid" />
+            <img src="./src/assets/img/logo.png" alt="asdlkcd" className="img-fluid" />
           </a>
           <nav id="navbar" className="navbar">
             <ul>
@@ -153,7 +153,7 @@ const Portfolio = () => {
               <div className="col-lg-4 ">
                 <div className="div-img-bg">
                   <div className="about-img">
-                    <img src="/src/img/my/me.jpg" className="img-responsive" alt="me" />
+                    <img src="./src/img/me.jpg" className="img-responsive" alt="men" />
                   </div>
                 </div>
               </div>
