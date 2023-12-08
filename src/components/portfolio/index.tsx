@@ -154,6 +154,7 @@ const Portfolio = () => {
                 <div className="div-img-bg">
                   <div className="about-img">
                     <img src="../src/img/me.jpg" className="img-responsive" alt="men" />
+                    <img src="../src/img/my/me.jpg" className="img-responsive" alt="mening" />
                   </div>
                 </div>
               </div>
