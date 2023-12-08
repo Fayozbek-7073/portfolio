@@ -88,7 +88,7 @@ const Portfolio = () => {
           <a className="navbar-brand" href="#">
             Home
           </a>
-          <a className="navbar-brand" href="#main" >
+          <a className="navbar-brand" href="#main">
             About
           </a>
           <a className="navbar-brand" href="#journal">
@@ -600,23 +600,6 @@ const Portfolio = () => {
                     className="php-email-form"
                   >
                     <div className="row gy-3">
-                      {/* <div className="col-lg-6">
-                        <div className="form-group contact-block1">
-                          <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required />
-                        </div>
-                      </div>
-
-                      <div className="col-lg-6">
-                        <div className="form-group">
-                          <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" required />
-                        </div>
-                      </div>
-
-                      <div className="col-lg-12">
-                        <div className="form-group">
-                          <input type="text" className="form-control" name="subject" id="subject" placeholder="Subject" required />
-                        </div>
-                      </div> */}
                       <div className="col-lg-12">
                         <h3>Admin massage</h3>
                         <div className="form-group">

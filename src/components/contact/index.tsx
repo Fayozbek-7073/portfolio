@@ -3,7 +3,6 @@ import { Flex, Spacer, Box } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { requies } from "../../server";
 import { useEffect, useState } from "react";
-// import { Center, Image } from "@chakra-ui/react";
 
 export interface AdminProfile {
   role: string;
@@ -30,25 +29,17 @@ export interface AdminProfile {
 
 const contact = () => {
   const [experiencesData, setExperience] = useState<AdminProfile[]>([]);
-  const [experiencesPage, setExperiencePage] = useState([]);
   const getData = async () => {
     const res = await requies.get("/auth/me");
-
     setExperience(res.data);
-
-    console.log(res);
   };
 
   useEffect(() => {
     getData();
   }, []);
-  
-  console.log("experiencesData", experiencesData);
-  console.log("experiencesPage", experiencesPage);
 
   return (
     <div>
-      {" "}
       <Flex>
         <Box p="4" width={"100%"}>
           <Box
@@ -72,7 +63,7 @@ const contact = () => {
               width={"95%"}
             />
             <span className="boxchak" color="">
-              {/* {item.lastName} */}Last Name
+              Last Name
             </span>
             <Input
               variant="flushed"
@@ -81,18 +72,7 @@ const contact = () => {
               size="md"
               width={"95%"}
             />
-            <span className="boxchak" color="">
-              {/* {item.username} */}
-            </span>
-            {/* <Input
-                    variant="flushed"
-                    placeholder="Fields"
-                    size="md"
-                    width={"95%"}
-                  /> */}
-            <span className="boxchak" color="">
-              {/* {item.info} */}Info
-            </span>
+
             <Input
               variant="flushed"
               placeholder=""
@@ -101,7 +81,7 @@ const contact = () => {
               value={experiencesData.info}
             />
             <span className="boxchak" color="">
-              {/* {item.instagram} */}Instagram
+              Instagram
             </span>
             <Input
               variant="flushed"

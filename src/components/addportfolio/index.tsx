@@ -28,25 +28,21 @@ export interface Photo {
 
 const Addport = () => {
   const [userInfo] = useLoginStore((s) => [s.userInfo], shallow);
-  const [page, setPage] = useState(0);
   const [portfolioData, setPortfolio] = useState([]);
-  const [portfolioPage, setPortfolioPage] = useState([]);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [selected, setSelected] = useState<File | null>(null);
 
   const [dataFoms, setDataFoms] = useState({
     name: "",
     url: "",
     description: "",
-    photo: '',
+    photo: "",
   });
-console.log(portfolioData,'asda');
+  console.log(portfolioData, "asda");
 
   const toast = useToast();
   //  eslint-disable-next-line
   const uploadImg = async (event: any) => {
     const formData = new FormData();
-    
+
     formData.append("file", event);
     const response = await requies.post("/upload", formData);
     console.log("response", response);
@@ -76,26 +72,25 @@ console.log(portfolioData,'asda');
 
   const getData = async () => {
     const res = await requies.get("/portfolios", {
-      page: page,
+      page: 1,
       user: userInfo._id,
       limit: 5,
     });
     setPortfolio(res.data.data);
-    setPortfolioPage(res.data.pagination);
   };
 
   useEffect(() => {
     getData();
-  }, [page, userInfo._id]);
+  }, [userInfo._id]);
 
   const addPortfolio = async () => {
     const formData = new FormData();
-    formData.append('name',dataFoms.name)
-    formData.append('url',dataFoms.url)
-    formData.append('description',dataFoms.description)
-    formData.append('photo',dataFoms.photo)
-    const {status } = await requies.post(`portfolios`,formData);
-    if(status ===201){
+    formData.append("name", dataFoms.name);
+    formData.append("url", dataFoms.url);
+    formData.append("description", dataFoms.description);
+    formData.append("photo", dataFoms.photo);
+    const { status } = await requies.post(`portfolios`, formData);
+    if (status === 201) {
       toast({
         title: "Account created.",
         description: "Portfolio uploud successfully",
@@ -108,8 +103,8 @@ console.log(portfolioData,'asda');
         name: "",
         url: "",
         description: "",
-        photo: '',
-      })
+        photo: "",
+      });
     }
   };
   //  eslint-disable-next-line
@@ -117,16 +112,14 @@ console.log(portfolioData,'asda');
     try {
       const { data } = await requies.get(`portfolios/${id}`);
       const { name, url, description } = data;
-      
 
       setDataFoms({
         name,
         url,
         description,
-        photo: '',
+        photo: "",
       });
       getData();
-      setSelected(id);
     } catch (error) {
       console.error(error);
     }

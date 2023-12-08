@@ -24,13 +24,7 @@ const Register = () => {
 
   console.log(user);
 
-
-
   const submit = async () => {
-
-    
-  
-    // e.preventDefault();
     try {
       const res = await requies.post("auth/register", user);
       console.log("res", res.data.user);
@@ -54,10 +48,6 @@ const Register = () => {
           Create your account. It's free and only takes a minute
         </p>
         <div className="name bg-line">
-          {/* onChange={(e: { target: { value: string } }) =>
-                              setUserLoginPasword(e.target.value)
-                            } */}
-
           <input
             type="text"
             onChange={(e: { target: { value: string } }) =>
@@ -116,9 +106,10 @@ const Register = () => {
         >
           Register
         </Button>
-       
-       <Link to={"/user"}><Button margin={"30px 10px"}>Admin Tell</Button> </Link>
 
+        <Link to={"/user"}>
+          <Button margin={"30px 10px"}>Admin Tell</Button>{" "}
+        </Link>
       </div>
       <div className="signIn">
         <p>

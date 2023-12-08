@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ENDPOINT, TOKEN } from "../container/index.js";
+import { ENDPOINT } from "../container/index.js";
 console.log("====================================");
 console.log("Token", localStorage.getItem("token"));
 console.log("====================================");

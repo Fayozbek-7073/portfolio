@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 export interface IUserInputs {
   role?: string | string[] | null;
@@ -18,16 +18,9 @@ export interface IUserInputs {
   accountNonLocked?: boolean;
   _id?: number;
   photo?: string;
- 
-  
 }
 
-
-  
-
-  
-
-interface ILoginstore  {
+interface ILoginstore {
   userInfo: IUserInputs;
   setUserInfo: (payload?: IUserInputs) => void;
 }
@@ -35,8 +28,8 @@ interface ILoginstore  {
 export const useLoginStore = create<ILoginstore>((set) => ({
   userInfo: {},
   setUserInfo: (payload) => {
-    console.log('payload',payload);
-    
+    console.log("payload", payload);
+
     set({ userInfo: payload || {} });
-  }
+  },
 }));

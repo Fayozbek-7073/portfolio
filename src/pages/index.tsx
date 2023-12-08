@@ -9,17 +9,8 @@ const Layout = () => {
       <Box maxH={"10vh"} bg={"##3e4047e6"} pos={"fixed"} top={0} left={0} right={0} zIndex={1323}>
         <Header />
       </Box>
-      <Box
-        mt={"10vh"}
-        minH={"90vh"}
-        pos={"fixed"}
-        top={0}
-        left={0}
-        right={0}
-        maxW={"20vw"}
-        bg={'gray.400'}
-        padding={'4'}
-      >
+
+      <Box mt={"10vh"} minH={"90vh"} pos={"fixed"} top={0} left={0} right={0} maxW={"20vw"} bg={"gray.400"} padding={"4"}>
         <Sidebar />
       </Box>
 

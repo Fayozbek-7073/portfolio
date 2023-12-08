@@ -2,7 +2,6 @@ import { Button, Stack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useLoginStore } from "../../store/useLogin.js";
 import shallow from "zustand/shallow";
-import { useCallback } from "react";
 export interface IMenu {
   path: string;
   icon?: React.FC;
@@ -10,56 +9,12 @@ export interface IMenu {
   role?: string[];
 }
 const Sidebar = () => {
-  const [userInfo, setUserInfo] = useLoginStore(
-    (s) => [s.userInfo, s.setUserInfo],
-    shallow
-  );
+  const [userInfo, setUserInfo] = useLoginStore((s) => [s.userInfo, s.setUserInfo], shallow);
 
   const logout = () => {
     setUserInfo({});
     localStorage.removeItem("token");
   };
-
-  const menu_data: IMenu[] = [
-    {
-      path: "/education",
-      title: `Education`,
-      role: ["user"],
-    },
-
-    // {
-    //   path: '/about',
-    //   title: `About`,
-    //   role: [ 'client',]
-    // },
-
-    // {
-    //   path: '/about',
-    //   title: `About`,
-
-    //   role: [ 'client',]
-    // },
-    // {
-    //   path: '/about',
-    //   title: `About`,
-    //   role: [ 'client',]
-
-    // },
-
-    // {
-    //   path: '/about',
-    //   title: `About`,
-    //   role: [ 'admin',]
-    // },
-  ];
-
-  const userFilter = useCallback(() => {
-    return menu_data.filter((item) =>
-      item?.role?.find((a) => a === userInfo?.role)
-    );
-  }, [userInfo]);
-
-  console.log(userFilter());
 
   return (
     <>

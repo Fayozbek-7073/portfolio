@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { requies } from "../../server/index.js";
 import {
   Input,
@@ -27,7 +27,6 @@ interface IEdit {
 const skill = () => {
   const [userInfo] = useLoginStore((s) => [s.userInfo], shallow);
   const toast = useToast();
-  const [page, setPage] = useState(0);
   const [skillData, setSkillData] = useState([]);
 
   const [skillEdit, setSkillEdit] = useState<IEdit>({
@@ -36,11 +35,12 @@ const skill = () => {
     precents: "",
     delete: false,
   });
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const getData = async () => {
     const res = await requies.get("/skills", {
-      page: page,
+      page: 1,
       user: userInfo._id,
       limit: 5,
     });
@@ -49,7 +49,7 @@ const skill = () => {
 
   useEffect(() => {
     getData();
-  }, [page, userInfo._id]);
+  }, [userInfo._id]);
 
   const editSkill = async () => {
     const res = await requies.put(`/skills/${skillEdit?.id}`, {
@@ -109,20 +109,11 @@ const skill = () => {
     }
   };
 
-
-
-
   return (
     <div>
       <Flex>
         <Box p="4" width={"50%"}>
-          <Box
-            backgroundColor={"#a0aec0"}
-            width={"98%"}
-            borderRadius={"10px"}
-            padding={"15px"}
-            height={"333px"}
-          >
+          <Box backgroundColor={"#a0aec0"} width={"98%"} borderRadius={"10px"} padding={"15px"} height={"333px"}>
             <Box className="box-list" textAlign={"center"} color={"#ffff"}>
               Create Skill <span className="boxchakx">Skill</span>{" "}
             </Box>
@@ -133,43 +124,28 @@ const skill = () => {
               placeholder="Skill Name"
               size="md"
               width={"95%"}
-              onChange={(e: { target: { value: stirng } }) =>
-                setSkillEdit({ ...skillEdit, name: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setSkillEdit({ ...skillEdit, name: e.target.value })}
             />
 
             <Input
               placeholder="Skill Percent"
               size="md"
               width={"95%"}
-              onChange={(e: { target: { value: stirng } }) =>
-                setSkillEdit({ ...skillEdit, precents: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setSkillEdit({ ...skillEdit, precents: e.target.value })}
             />
 
-            <Button
-              className="boxchak"
-              colorScheme="blue"
-              onClick={skillCreate}
-            >
+            <Button className="boxchak" colorScheme="blue" onClick={skillCreate}>
               Create Skill
             </Button>
           </Box>
         </Box>
         <Spacer />
         <Box p="4" width={"60%"}>
-          <Box
-            backgroundColor={"#a0aec0"}
-            width={"98%"}
-            borderRadius={"10px"}
-            padding={"15px"}
-            height={"700px"}
-            overflow={"scroll"}
-          >
+          <Box backgroundColor={"#a0aec0"} width={"98%"} borderRadius={"10px"} padding={"15px"} height={"700px"} overflow={"scroll"}>
             <Box className="box-list" textAlign={"center"} color={"#ffff"}>
               Skills <span className="boxchakx">List</span>{" "}
             </Box>
-            {skillData?.data?.map((item, index) => (
+            {skillData?.data?.map((item) => (
               <Box>
                 <p>
                   <span className="boxchak" color="">
@@ -222,14 +198,7 @@ const skill = () => {
                     onOpen();
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-trash"
-                    viewBox="0 0 16 16"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
                     <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
                   </svg>
@@ -250,7 +219,6 @@ const skill = () => {
                 </a>
               </li>
 
-
               <li className="page-item">
                 <a className="page-link" href="#">
                   {">"}
@@ -266,9 +234,7 @@ const skill = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>
-            {skillEdit.delete ? "Delete" : "Edit"} Skill
-          </ModalHeader>
+          <ModalHeader>{skillEdit.delete ? "Delete" : "Edit"} Skill</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {skillEdit.delete ? (
@@ -282,18 +248,14 @@ const skill = () => {
                   value={skillEdit.name}
                   size="md"
                   width={"95%"}
-                  onChange={(e: { target: { value: stirng } }) =>
-                    setSkillEdit({ ...skillEdit, name: e.target.value })
-                  }
+                  onChange={(e: { target: { value: stirng } }) => setSkillEdit({ ...skillEdit, name: e.target.value })}
                 />
                 <Input
                   placeholder="Skill Percent"
                   size="md"
                   value={skillEdit.precents}
                   width={"95%"}
-                  onChange={(e: { target: { value: stirng } }) =>
-                    setSkillEdit({ ...skillEdit, precents: e.target.value })
-                  }
+                  onChange={(e: { target: { value: stirng } }) => setSkillEdit({ ...skillEdit, precents: e.target.value })}
                 />
               </>
             )}

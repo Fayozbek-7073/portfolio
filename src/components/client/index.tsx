@@ -1,11 +1,7 @@
-
-
 const Client = () => {
-  
-
   return (
     <>
-    <p>Clent</p>
+      <p>Clent</p>
     </>
   );
 };

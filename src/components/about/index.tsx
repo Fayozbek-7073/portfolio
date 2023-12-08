@@ -1,6 +1,5 @@
 import {
   Input,
-  Progress,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -29,11 +28,12 @@ export interface IExperiences {
   endDate: string;
   user: User;
   __v: number;
+  name: string;
 }
 
 export interface User {
   role: string;
-  fields: any[];
+  fields: [];
   client: boolean;
   _id: string;
   firstName: string;
@@ -62,9 +62,9 @@ interface IExperiencesData {
   endDate: string;
   _id: string;
 }
+
 const About = () => {
   const [userInfo] = useLoginStore((s) => [s.userInfo], shallow);
-  const [page, setPage] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [experiences, setExperiences] = useState<IExperiencesData>({
     yourPostion: "",
@@ -75,41 +75,16 @@ const About = () => {
     _id: "",
   });
   const [experiencesData, setExperience] = useState<IExperiences[]>([]);
-  const [experiencesPage, setExperiencePage] = useState([]);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [selected, setSelected] = useState<File | null>(null);
   const toast = useToast();
-  const [datafoms, setdataFoms] = useState({
-    companyName: "",
-    name: "",
-    url: "",
-    firstName: "",
-    description: "",
-    photo: null,
-  });
-
-  // const toast = useToast();
-
-  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (event.target.files && event.target.files.length > 0) {
-  //     setSelectedFile(event.target.files[0]);
-  //   }
-  // };
 
   const getData = async () => {
-    const res = await requies.get("/experiences", {
-      page: page,
-      user: userInfo._id,
-      limit: 5,
-    });
-    console.log(res);
+    const res = await requies.get("/experiences", { page: 1, user: userInfo._id, limit: 5 });
     setExperience(res.data.data);
-    setExperiencePage(res.data.pagination);
   };
 
   useEffect(() => {
     getData();
-  }, [page, userInfo._id]);
+  }, [userInfo._id]);
 
   const addExp = async () => {
     const formData = new FormData();
@@ -119,25 +94,11 @@ const About = () => {
     formData.append("startDate", experiences.startDate);
     formData.append("endDate", experiences.endDate);
 
-    const { data, status } = await requies.post(`experiences`, formData);
-    console.log("datadata", data, status);
+    const { status } = await requies.post(`experiences`, formData);
     if (status === 201) {
-      toast({
-        title: "Account created.",
-        description: "Experiences Add successfully",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      });
+      toast({ title: "Account created.", description: "Experiences Add successfully", status: "success", duration: 9000, isClosable: true });
       getData();
-      setExperiences({
-        yourPostion: "",
-        company: "",
-        description: "",
-        startDate: "",
-        endDate: "",
-        _id: "",
-      });
+      setExperiences({ yourPostion: "", company: "", description: "", startDate: "", endDate: "", _id: "" });
     }
   };
 
@@ -149,58 +110,27 @@ const About = () => {
       formData.append("description", experiences.description);
       formData.append("startDate", experiences.startDate);
       formData.append("endDate", experiences.endDate);
-      const { data, status } = await requies.put(
-        `experiences/${experiences._id}`,
-        formData
-      );
+      const { status } = await requies.put(`experiences/${experiences._id}`, formData);
 
       if (status === 200) {
-        toast({
-          title: "Account created.",
-          description: "Experiences Update successfully",
-          status: "success",
-          duration: 9000,
-          isClosable: true,
-        });
+        toast({ title: "Account created.", description: "Experiences Update successfully", status: "success", duration: 9000, isClosable: true });
         getData();
-        setExperiences({
-          yourPostion: "",
-          company: "",
-          description: "",
-          startDate: "",
-          endDate: "",
-          _id: "",
-        });
+        setExperiences({ yourPostion: "", company: "", description: "", startDate: "", endDate: "", _id: "" });
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleInputChange = (event: any) => {
-    const { name, value } = event.target;
-    setdataFoms((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
   const deletes = async (id: string) => {
     await requies.delete(`experiences/${id}`);
     getData();
   };
-  console.log("experiences", experiences);
   return (
     <div>
       <Flex>
         <Box p="4" width={"100%"}>
-          <Box
-            backgroundColor={"#a0aec0"}
-            width={"98%"}
-            borderRadius={"10px"}
-            padding={"15px"}
-            height={"673px"}
-          >
+          <Box backgroundColor={"#a0aec0"} width={"98%"} borderRadius={"10px"} padding={"15px"} height={"673px"}>
             <Box className="box-list" textAlign={"center"} color={"#ffff"}>
               Add Your <span className="boxchakx">Experience</span>{" "}
             </Box>
@@ -212,9 +142,7 @@ const About = () => {
               placeholder="Your Position"
               size="md"
               width={"95%"}
-              onChange={(e: { target: { value: string } }) =>
-                setExperiences({ ...experiences, yourPostion: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, yourPostion: e.target.value })}
             />
             <span className="boxchak" color="">
               Company
@@ -224,9 +152,7 @@ const About = () => {
               placeholder="Company name"
               size="md"
               width={"95%"}
-              onChange={(e: { target: { value: string } }) =>
-                setExperiences({ ...experiences, company: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, company: e.target.value })}
             />
             <span className="boxchak" color="">
               Description
@@ -237,9 +163,7 @@ const About = () => {
               placeholder="Description"
               size="md"
               width={"95%"}
-              onChange={(e: { target: { value: string } }) =>
-                setExperiences({ ...experiences, description: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, description: e.target.value })}
             />
             <span className="boxchak" color="">
               Start Date
@@ -248,9 +172,7 @@ const About = () => {
               placeholder="Select Date and Time"
               size="md"
               type="datetime-local"
-              onChange={(e: { target: { value: string } }) =>
-                setExperiences({ ...experiences, startDate: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, startDate: e.target.value })}
             />
             <span className="boxchak" color="">
               Start Date
@@ -259,9 +181,7 @@ const About = () => {
               placeholder="Select Date and Time"
               size="md"
               type="datetime-local"
-              onChange={(e: { target: { value: string } }) =>
-                setExperiences({ ...experiences, endDate: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, endDate: e.target.value })}
             />
             <p></p>
             <Button className="boxchak" colorScheme="blue" onClick={addExp}>
@@ -273,27 +193,19 @@ const About = () => {
       </Flex>
       <Flex>
         <Box p="4" width={"100%"}>
-          <Box
-            backgroundColor={"#a0aec0"}
-            width={"98%"}
-            borderRadius={"10px"}
-            padding={"15px"}
-            minHeight={"503px"}
-          >
+          <Box backgroundColor={"#a0aec0"} width={"98%"} borderRadius={"10px"} padding={"15px"} minHeight={"503px"}>
             <Box className="box-list" textAlign={"center"} color={"#ffff"}>
               Experience List
             </Box>
             <Box>
-              {experiencesData?.map((item: any) => (
+              {experiencesData?.map((item: IExperiences) => (
                 <div className="box-portfoli" key={item._id}>
                   <h1>{item.name}</h1>
                   <p>
-                    <span className="text-primary"> Company : </span>{" "}
-                    {item.companyName}
+                    <span className="text-primary"> Company : </span> {item.companyName}
                   </p>
                   <p>
-                    <span className="text-primary"> Portfolio Title:</span>{" "}
-                    {item.description}
+                    <span className="text-primary"> Portfolio Title:</span> {item.description}
                   </p>
                   <button
                     type="button"
@@ -314,11 +226,7 @@ const About = () => {
                     edit{" "}
                   </button>
 
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={() => deletes(item._id)}
-                  >
+                  <button type="button" className="btn btn-danger" onClick={() => deletes(item._id)}>
                     delete{" "}
                   </button>
                   <hr className="color-white" />
@@ -353,7 +261,6 @@ const About = () => {
             </span>
             <br />
             <p></p>
-            {/* <Input  height={"150px"} variant='flushed' placeholder='Your Description:' size='md' width={"95%"}/>  */}
           </Box>
         </Box>
         <Spacer />
@@ -370,37 +277,23 @@ const About = () => {
               value={experiences.yourPostion}
               size="md"
               width={"95%"}
-              onChange={(e: { target: { value: stirng } }) =>
-                setExperiences({ ...experiences, yourPostion: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, yourPostion: e.target.value })}
             />
             <Input
               placeholder="Company"
               size="md"
               value={experiences.company}
               width={"95%"}
-              onChange={(e: { target: { value: stirng } }) =>
-                setExperiences({ ...experiences, company: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, company: e.target.value })}
             />
-            {/* <Input
-              placeholder="Description"
-              size="md"
-              value={experiences.description}
-              width={"95%"}
-              onChange={(e: { target: { value: stirng } }) =>
-                setExperiences({ ...experiences, description: e.target.value })
-              }
-            /> */}
+
             <Input
               placeholder="Start Date"
               size="md"
               value={experiences.startDate}
               width={"95%"}
               type="datetime-local"
-              onChange={(e: { target: { value: stirng } }) =>
-                setExperiences({ ...experiences, startDate: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, startDate: e.target.value })}
             />
 
             <Input
@@ -409,9 +302,7 @@ const About = () => {
               value={experiences.endDate}
               width={"95%"}
               type="datetime-local"
-              onChange={(e: { target: { value: stirng } }) =>
-                setExperiences({ ...experiences, endDate: e.target.value })
-              }
+              onChange={(e: { target: { value: string } }) => setExperiences({ ...experiences, endDate: e.target.value })}
             />
           </ModalBody>
 

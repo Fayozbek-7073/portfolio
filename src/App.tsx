@@ -23,19 +23,21 @@ import Portfolio from "./components/portfolio";
 import Portfoliadd from "./components/addportfolio/index";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 function App() {
-  const navigator =useNavigate()
-  useEffect(()=>{
-    if(!localStorage.getItem('token')){
-      navigator('/login')
+  const navigator = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigator("/login");
     }
-  },[])
+  }, []);
+
   return (
     <Routes>
       <Route index path="/login" element={<Login />} />
-        <Route  path="/" element={<Layout/>}>
+      <Route path="/" element={<Layout />}>
         <Route />
-        <Route path="main"  element={<Main />} />
+        <Route path="main" element={<Main />} />
         <Route path="portfolio" element={<Portfolio />} />
         <Route path="testimonials" element={<Testimonials />} />
         <Route path="skill" element={<Skill />} />
